@@ -44,7 +44,7 @@ cd vuln-recon
 
 echo -e $black"[*] We Use (subfinder) For Find Subdomain...!!\n"$white
 
-subfinder -d $target -o subdomain.txt
+subfinder -d $target | tee subdomain.txt
 
 if [ ! -s subdomain.txt ]; then
     echo -e $red"[/] The (subfinder) Didnt Find Any Bug....."$white
@@ -72,8 +72,8 @@ echo -e $pruple"[*] Type This In Terminal >>> (cat live-subdomain.txt | waybacku
 
 echo -e "[*] Type This In Terminal >>> (cat live-subdomain.txt | gau | tee urls-gau.txt) \n"$white
 
-read -p $red"Do You Understand..? (Y/n): " response
-$white
+read -p "Do You Understand..? (Y/n): " response
+
 if [[ "$response" == "y" || "$response" == "" || "$response" == "Y" ]]; then
   count=1
 
@@ -90,6 +90,11 @@ while [ $count -le 1 ]; do
     sort -u urls-waybackurls.txt urls-gau.txt | tee url.txt
 
     cat url.txt | grep "=" | tee params.txt
+
+    if [ ! -s params.txt ]; then
+    echo -e $red"[/] The (waybackurls, gau) Didnt Find Any Bug....."$white
+    exit
+    fi
 
     count=$((count + 1))
 done
@@ -117,8 +122,8 @@ echo -e "[*] Type This $blue (UPLOUD-FILE) $pruple In Terminal >>> (cat params.t
 
 echo -e "[*] Type This $blue (REDIRECT) $pruple In Terminal >>> (cat params.txt | grep '=http' | qsreplace 'https://evil.com' | httpx-toolkit -silent -fr -location | grep 'evil.com' | tee vulns/openredirect.txt) \n"$white
 
-read -p $red"Do You Understand..? (Y/n): " response
-$white
+read -p "Do You Understand..? (Y/n): " response
+
 if [[ "$response" == "y" || "$response" == "" || "$response" == "Y" ]]; then
   count=1
 
@@ -128,7 +133,7 @@ while [ $count -le 1 ]; do
 
     clear
 
-    echo $red"[-] I Know You Didn't UndersTanding...!!\n"$white
+    echo -e $red"[-] I Know You Didn't UndersTanding...!!\n"$white
 
     echo -e $pruple"[*] Type This For $blue (XSS) $pruple In Terminal >>> (cat params.txt | gf xss | tee vulns/potential-xss.txt) \n $red IF This Done Type This \n $pruple (cat potential-xss.txt | xargs -0 -P 20 kxss > vulns/reflected-xss.txt) \n"
 
