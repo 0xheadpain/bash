@@ -112,45 +112,30 @@ echo -e $blue"[*] We Use (gf -list) For Find vulns...!!\n"$white
 
 clear
 
-echo -e $pruple"[*] Type This For $blue (XSS) $pruple In Terminal >>> (cat params.txt | gf xss | tee vulns/potential-xss.txt) \n $red IF This Done Type This \n $pruple (cat potential-xss.txt | xargs -n1 -P 20 kxss > vulns/reflected-xss.txt) \n"
 
-echo -e "[*] Type This $blue (LFI) $pruple In Terminal >>> (cat params.txt | gf lfi | tee vulns/lfi.txt) \n"$white
+konsole -e bash -c "sleep 1; xdotool type 'cat params.txt | gf lfi | tee vulns/lfi.txt'; xdotool key Return; exec bash"
 
-echo -e "[*] Type This $blue (SQLI) $pruple In Terminal >>> (cat params.txt | gf sqli | tee vulns/sqli.txt) \n"$white
+konsole -e bash -c "sleep 1; xdotool type 'cat params.txt | gf sqli | tee vulns/sqli.txt'; xdotool key Return; exec bash"
 
-echo -e "[*] Type This $blue (UPLOUD-FILE) $pruple In Terminal >>> (cat params.txt | gf upload-fields | tee vulns/upload-fields.txt) \n"$white
+konsole -e bash -c "sleep 1; xdotool type 'cat params.txt | gf upload-fields | tee vulns/upload-fields.txt'; xdotool key Return; exec bash"
 
-echo -e "[*] Type This $blue (REDIRECT) $pruple In Terminal >>> (cat params.txt | grep '=http' | qsreplace 'https://evil.com' | httpx-toolkit -silent -fr -location | grep 'evil.com' | tee vulns/openredirect.txt) \n"$white
+konsole -e bash -c "sleep 1; xdotool type 'cat params.txt | grep '=http' | qsreplace 'https://evil.com' | httpx-toolkit -silent -fr -location | grep 'evil.com' | tee vulns/openredirect.txt'; xdotool key Return; exec bash"
 
-read -p "Do You Understand..? (Y/n): " response
+konsole -e bash -c "sleep 1; xdotool type 'cat params.txt | gf xss | tee vulns/potential-xss.txt && cat vulns/potential-xss.txt | gf xss | kxss | tee vulns/live-xss.txt'; xdotool key Return; exec bash"
 
-if [[ "$response" == "y" || "$response" == "" || "$response" == "Y" ]]; then
-  count=1
+clear
 
-while [ $count -le 1 ]; do
+echo -e $lpurp"
+ ██▒   █▓ █    ██  ██▓     ███▄    █  ██▀███  ▓█████  ▄████▄   ▒█████   ███▄    █ 
+▓██░   █▒ ██  ▓██▒▓██▒     ██ ▀█   █ ▓██ ▒ ██▒▓█   ▀ ▒██▀ ▀█  ▒██▒  ██▒ ██ ▀█   █ 
+ ▓██  █▒░▓██  ▒██░▒██░    ▓██  ▀█ ██▒▓██ ░▄█ ▒▒███   ▒▓█    ▄ ▒██░  ██▒▓██  ▀█ ██▒
+  ▒██ █░░▓▓█  ░██░▒██░    ▓██▒  ▐▌██▒▒██▀▀█▄  ▒▓█  ▄ ▒▓▓▄ ▄██▒▒██   ██░▓██▒  ▐▌██▒
+   ▒▀█░  ▒▒█████▓ ░██████▒▒██░   ▓██░░██▓ ▒██▒░▒████▒▒ ▓███▀ ░░ ████▓▒░▒██░   ▓██░
+   ░ ▐░  ░▒▓▒ ▒ ▒ ░ ▒░▓  ░░ ▒░   ▒ ▒ ░ ▒▓ ░▒▓░░░ ▒░ ░░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+   ░ ░░  ░░▒░ ░ ░ ░ ░ ▒  ░░ ░░   ░ ▒░  ░▒ ░ ▒░ ░ ░  ░  ░  ▒     ░ ▒ ▒░ ░ ░░   ░ ▒░
+     ░░   ░░░ ░ ░   ░ ░      ░   ░ ░   ░░   ░    ░   ░        ░ ░ ░ ▒     ░   ░ ░ 
+      ░     ░         ░  ░         ░    ░        ░  ░░ ░          ░ ░           ░ 
+     ░                                               ░                            
+\n"$white
 
-    konsole -e bash -c "sleep 1; xdotool type ''; xdotool key Return; exec bash" | konsole -e bash -c "sleep 1; xdotool type ''; xdotool key Return; exec bash" | konsole -e bash -c "sleep 1; xdotool type ''; xdotool key Return; exec bash" | konsole -e bash -c "sleep 1; xdotool type ''; xdotool key Return; exec bash" | konsole -e bash -c "sleep 1; xdotool type ''; xdotool key Return; exec bash" 
-
-    clear
-
-    echo -e $red"[-] I Know You Didn't UndersTanding...!!\n"$white
-
-    echo -e $pruple"[*] Type This For $blue (XSS) $pruple In Terminal >>> (cat params.txt | gf xss | tee vulns/potential-xss.txt) \n $red IF This Done Type This \n $pruple (cat potential-xss.txt | xargs -0 -P 20 kxss > vulns/reflected-xss.txt) \n"
-
-    echo -e "[*] Type This $blue (LFI) $pruple In Terminal >>> (cat params.txt | gf lfi | tee vulns/lfi.txt) \n"$white
-
-    echo -e "[*] Type This $blue (SQLI) $pruple In Terminal >>> (cat params.txt | gf sqli | tee vulns/sqli.txt) \n"$white
-
-    echo -e "[*] Type This $blue (UPLOUD-FILE) $pruple In Terminal >>> (cat params.txt | gf upload-fields | tee vulns/upload-fields.txt) \n"$white
-
-    echo -e "[*] Type This $blue (REDIRECT) $pruple In Terminal >>> (cat params.txt | grep '=http' | qsreplace 'https://evil.com' | httpx-toolkit -silent -fr -location | grep 'evil.com' | tee vulns/openredirect.txt) \n"$white
-
-    count=$((count + 1))
-done
-elif [[ "$response" == "n" ]]; then
-  exit
-else
-  echo "Invalid input. Please enter 'y' or 'n'."
-fi
-
-echo -e $green"[+] All Tasks Done..!!"$white
+echo -e $green"[+] Thank You For Use Tool...!!"$white
